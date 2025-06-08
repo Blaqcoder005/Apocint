@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apostolic Chapel International | Habitation of Grace</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <div class="dashboard">
+    <!-- Sidebar on the left -->
+    <aside class="sidebar">
+      <h2>ACI Dashboard</h2>
+      <nav>
+        <ul>
+          <li><a href="/admin">Dashboard</a></li>
+          <li><a href="/admin/messages">Messages</a></li>
+          <li><a href="/upload">Upload</a></li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main content on the right -->
+    <main class="main-content">
+      <h1>Latest Messages</h1>
+
+      <div class="message-box">
+        <p><strong>From:</strong> John Doe</p>
+        <p><strong>Message:</strong> Hello Pastor, thank you for last Sunday!</p>
+      </div>
+
+      <!-- You can loop through more messages here -->
+    </main>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Apostolic Chapel International. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Apostolic Chapel International | Habitation of Grace</title> 
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> 
+ <style type="text/css" id="dcoder_stylesheet">.parallax-section {
+  background: url('images/bg-ministry.jpg') center center / cover no-repeat fixed;
+  padding: 5rem 1rem;
+  color: white;
+  position: relative;
+}
+
+.parallax-section h2 {
+  color: #0033cc;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.ministry-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent */
+  color: #000;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  width: 250px;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+/* ===== GENERAL STYLES ===== */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f4f7fc;
+  color: #222;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+/* ===== NAVIGATION BAR ===== */
+.navbar {
+  background: #0033cc;
+  color: white;
+  padding: 1rem 0;
+}
+
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar .logo img {
+  height: 40px;
+  display: block;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: #ff0000; /* matches logo text */
+}
+
+.menu-toggle {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: none;
+}
+
+/* ===== HERO SECTION ===== */
+.hero {
+  background: url('images/image.jpg') center/cover no-repeat;
+  color: white;
+  text-align: center;
+  padding: 5rem 1rem;
+}
+
+.hero-content {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+/* ===== BUTTON STYLING ===== */
+.btn {
+  background-color: #0033cc;
+  color: white;
+  padding: 0.8rem 1.6rem;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  margin-top: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #001f80;
+}
+
+/* ===== SECTIONS ===== */
+.about, .ministries, .sermon {
+  padding: 3rem 1rem;
+  background-color: #fff;
+}
+
+
+/* ===== FOOTER ===== */
+footer {
+  background-color: #0033cc;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 3rem;
+}
+
+footer p {
+  margin: 0;
+}
+
+/* ===== RESPONSIVE NAVBAR ===== */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background: #0033cc;
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+}
+
+.logo {
+  margin-right: 20px;
+}
+
+.hero-banner {
+  background: url('images/hero-bg.jpg') center center / cover no-repeat fixed;
+  padding: 7rem 1rem;
+  color: white;
+  text-align: center;
+  position: relative;
+}
+
+.hero-content {
+  background-color: rgba(0, 0, 0, 0.6);
+  display: inline-block;
+  padding: 2rem 3rem;
+  border-radius: 12px;
+  max-width: 600px;
+  margin: 0 auto;
+  animation: fadeIn 1.5s ease;
+}
+
+.hero-content h2 {
+  font-size: 2.4rem;
+  margin-bottom: 1rem;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Optional fade-in effect */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.about {
+  background-color: #ffffff;
+  padding: 4rem 1rem;
+  text-align: center;
+}
+
+.about h2 {
+  color: #0033cc;
+  margin-bottom: 1.5rem;
+}
+
+.sermon {
+  background-color: #f5f8ff;
+  padding: 4rem 1rem;
+  text-align: center;
+}
+
+.sermon h2 {
+  color: #0033cc;
+  margin-bottom: 1rem;
+}
+
+.sermon p {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}</style></head> 
+ <body> <!-- Navigation --> 
+  <header class="navbar"> 
+   <div class="container"> 
+    <div class="logo"> <a href="index.html"> <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Church Logo"> </a> 
+    </div> <button class="menu-toggle" id="menuToggle">☰</button> 
+    <ul class="nav-links" id="navLinks"> 
+     <li><a href="index.html" class="active">Home</a></li> 
+     <li><a href="about.html">About</a></li> 
+     <li><a href="sermons.html">Sermons</a></li> 
+     <li><a href="events.html">Events</a></li> 
+     <li><a href="contact.html">Contact</a></li> 
+    </ul> 
+   </div> 
+  </header> <!-- Hero Section --> 
+  <section class="parallax-section hero-banner"> 
+   <div class="hero-content"> 
+    <h2>Welcome to Apostolic Chapel International</h2> 
+    <p>A place where grace meets purpose.</p> <a href="about.html" class="btn">Learn More</a> 
+   </div> 
+  </section> <!-- About Preview --> 
+  <section class="about"> 
+   <div class="container"> 
+    <h2>Who We Are</h2> 
+    <p> We are a Spirit-filled community of believers, passionately committed to spreading the love of Christ, equipping the saints, and transforming lives through the Word, worship, and the power of the Holy Spirit. </p> 
+   </div> 
+  </section> <!-- Ministries Section with Parallax --> 
+  <section class="parallax-section"> 
+   <div class="container"> 
+    <h2>Our Ministries</h2> 
+    <div class="ministry-cards"> 
+     <div class="card"> 
+      <h3>Youth Fellowship</h3> 
+      <p>Raising godly leaders for tomorrow.</p> 
+     </div> 
+     <div class="card"> 
+      <h3>Women's Fellowship</h3> 
+      <p>Empowering women through faith.</p> 
+     </div> 
+     <div class="card"> 
+      <h3>Men of Valor</h3> 
+      <p>Building strong men rooted in Christ.</p> 
+     </div> 
+    </div> 
+   </div> 
+  </section> <!-- Sermon Teaser --> 
+  <section class="sermon"> 
+   <div class="container"> 
+    <h2>Latest Sermon</h2> 
+    <p><em>“Grace for the Journey”</em> by Apostle Joshua Oluseye</p> <a href="sermons.html" class="btn">Watch Sermons</a> 
+   </div> 
+  </section> <!-- Footer --> 
+  <footer> 
+   <div class="container"> 
+    <p>© 2025 Apostolic Chapel International. All rights reserved.</p> 
+   </div> 
+  </footer> 
+ 
+<script type="text/javascript" id="dcoder_script">const links = document.querySelectorAll('nav a');
+  const currentPage = window.location.pathname;
+
+  links.forEach(link => {
+    if (link.getAttribute('href') === currentPage) {
+      link.classList.add('active');
+    }
+  });
+  
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener("click", function(e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute("href")).scrollIntoView({
+        behavior: "smooth"
+      });
+    });
+  });
+
+
+  const menuToggle = document.getElementById("menuToggle");
+  const navLinks = document.getElementById("navLinks");
+
+  menuToggle.addEventListener("click", function () {
+    navLinks.classList.toggle("show");
+  });
+
+  document.querySelectorAll("#navLinks a").forEach(link => {
+    link.addEventListener("click", () => {
+      navLinks.classList.remove("show");
+    });
+  });</script></body></html>

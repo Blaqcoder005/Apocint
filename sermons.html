@@ -1,0 +1,22 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sermons</title>
+</head>
+<body>
+  <h1>Latest Sermons</h1>
+
+  {% if sermon_files %}
+    <ul>
+      {% for sermon in sermon_files %}
+        <li>
+          <a href="{{ url_for('static', filename='sermons/' + sermon) }}" download>{{ sermon }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No sermons uploaded yet.</p>
+  {% endif %}
+</body>
+</html>

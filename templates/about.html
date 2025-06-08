@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | Apostolic Chapel International</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<style type="text/css" id="dcoder_stylesheet">.hero-banner {
+  background: url('images/hero-bg.jpg') center center / cover no-repeat fixed;
+  padding: 7rem 1rem;
+  color: white;
+  text-align: center;
+  position: relative;
+}
+
+.hero-content {
+  background-color: rgba(0, 0, 0, 0.6);
+  display: inline-block;
+  padding: 2rem 3rem;
+  border-radius: 12px;
+  max-width: 600px;
+  margin: 0 auto;
+  animation: fadeIn 1.5s ease;
+}
+
+.hero-content h2 {
+  font-size: 2.4rem;
+  margin-bottom: 1rem;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Optional fade-in effect */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.about {
+  background-color: #ffffff;
+  padding: 4rem 1rem;
+  text-align: center;
+}
+
+.about h2 {
+  color: #0033cc;
+  margin-bottom: 1.5rem;
+}
+
+.sermon {
+  background-color: #f5f8ff;
+  padding: 4rem 1rem;
+  text-align: center;
+}
+
+.sermon h2 {
+  color: #0033cc;
+  margin-bottom: 1rem;
+}
+
+.sermon p {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ===== GENERAL STYLES ===== */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f4f7fc;
+  color: #222;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+/* ===== NAVIGATION BAR ===== */
+.navbar {
+  background: #0033cc;
+  color: white;
+  padding: 1rem 0;
+}
+
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar .logo img {
+  height: 40px;
+  display: block;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: #ff0000; /* matches logo text */
+}
+
+.menu-toggle {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.8rem;
+  cursor: pointer;
+  display: none;
+}
+
+/* ===== HERO SECTION ===== */
+.hero {
+  background: url('images/image.jpg') center/cover no-repeat;
+  color: white;
+  text-align: center;
+  padding: 5rem 1rem;
+}
+
+.hero-content {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+/* ===== BUTTON STYLING ===== */
+.btn {
+  background-color: #0033cc;
+  color: white;
+  padding: 0.8rem 1.6rem;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  margin-top: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #001f80;
+}
+
+/* ===== SECTIONS ===== */
+.about, .ministries, .sermon {
+  padding: 3rem 1rem;
+  background-color: #fff;
+}
+
+.ministry-cards {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.card {
+  background-color: #ecf0f1;
+  padding: 1.5rem;
+  border-radius: 8px;
+  width: 250px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* ===== FOOTER ===== */
+footer {
+  background-color: #0033cc;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 3rem;
+}
+
+footer p {
+  margin: 0;
+}
+
+/* ===== RESPONSIVE NAVBAR ===== */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background: #0033cc;
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+}
+
+.logo {
+  margin-right: 20px;
+}
+
+.about-history {
+  padding: 3rem 1rem;
+  background-color: #fff;
+  color: #333;
+  text-align: left;
+}
+
+.about-history h2 {
+  color: #0033cc;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.about-history p {
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 1.2rem;
+}
+
+.about-history .closing-line {
+  font-style: italic;
+  text-align: center;
+  margin-top: 2rem;
+  color: #0033cc;
+}
+
+.mission-vision, .doctrine, .pastor-profile {
+  padding: 3rem 1rem;
+  background-color: #fff;
+  color: #333;
+}
+
+.mission-vision h2, .doctrine h2, .pastor-profile h2 {
+  color: #0033cc;
+  margin-bottom: 1rem;
+}
+
+.doctrine ul {
+  text-align: left;
+  max-width: 800px;
+  margin: 0 auto;
+  padding-left: 20px;
+}
+
+.doctrine ul li {
+  margin-bottom: 0.8rem;
+  line-height: 1.6;
+  list-style: disc;
+}
+
+.pastor-box {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 2rem;
+  justify-content: center;
+}
+
+.pastor-box img {
+  width: 200px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.pastor-box .bio {
+  max-width: 600px;
+  text-align: left;
+}
+
+.pastor-box blockquote {
+  font-style: italic;
+  color: #cc0000;
+  margin-top: 1rem;
+  border-left: 4px solid #cc0000;
+  padding-left: 1rem;
+}
+/* Mission, Vision, and Doctrine */
+.mission-vision, .doctrine, .about-history, .pastor-profile {
+  padding: 3rem 1rem;
+  background-color: #fff;
+  color: #333;
+  text-align: left;
+}
+
+.mission-vision h2, .doctrine h2, .about-history h2, .pastor-profile h2 {
+  color: #0033cc;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.doctrine ul {
+  max-width: 800px;
+  margin: 0 auto;
+  padding-left: 20px;
+  list-style: disc;
+}
+
+.doctrine ul li {
+  margin-bottom: 0.8rem;
+  line-height: 1.6;
+}
+
+/* Pastor Profile */
+.pastor-box {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.pastor-box img {
+  width: 220px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+.pastor-box .bio {
+  max-width: 600px;
+}
+
+.pastor-box blockquote {
+  font-style: italic;
+  color: #cc0000;
+  margin-top: 1rem;
+  border-left: 4px solid #cc0000;
+  padding-left: 1rem;
+}
+
+/* Hero Banner */
+.hero-banner {
+  background: url('images/hero-bg.jpg') center center / cover no-repeat fixed;
+  padding: 6rem 1rem;
+  color: white;
+  text-align: center;
+}
+
+.hero-content {
+  background-color: rgba(0,0,0,0.5);
+  display: inline-block;
+  padding: 2rem 3rem;
+  border-radius: 10px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.hero-content h2 {
+  font-size: 2.4rem;
+  margin-bottom: 1rem;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+}</style></head>
+<body>
+
+  <!-- Navigation -->
+  <header class="navbar">
+    <div class="container">
+      <div class="logo">
+        <a href="index.html">
+          <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Church Logo">
+        </a>
+      </div>
+      <button class="menu-toggle" id="menuToggle">☰</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="sermons.html">Sermons</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-banner">
+    <div class="hero-content">
+      <h2>About Apostolic Chapel Int'l</h2>
+      <p>Habitation of Grace — A Global Apostolic &amp; Prophetic Movement</p>
+    </div>
+  </section>
+
+  <!-- Who We Are -->
+  <section class="about-history">
+    <div class="container">
+      <h2>Who We Are</h2>
+      <p>
+        Apostolic Chapel International (Habitation of Grace) was founded on <strong>Thursday, November 8, 2000</strong> by <strong>Apostle Joshua Oluseye Olayiwola</strong> in Ibadan, Nigeria. The vision began in 1998/99 at Sarumi Mountain Airport as a weekly program, and grew into full services in 2001.
+      </p>
+      <p>
+        The Church journeyed from Iyana Church to Isebo in 2003, introduced Bible Study in 2004, and endured a fire outbreak in 2005 — giving birth to the annual Passover Anniversary revival. The current church site was opened in 2008, and the building completed by 2014.
+      </p>
+      <p>
+        Major programs include the Ministers’ Vigil (2003), “My Redeemer Liveth” deliverance series (2016), and “God at Sinai” empowerment program (2001). Apostle Joshua has authored books including <em>Noah’s Ark</em> and <em>Be at Peace</em>, and was awarded a Doctorate in Theology in 2014.
+      </p>
+      <p>
+        With global reach across Africa, Europe, and the U.S., the ministry remains committed to soul-winning, deliverance, and raising end-time ministers under a prophetic apostolic mantle.
+      </p>
+    </div>
+  </section>
+
+  <!-- Mission & Vision -->
+  <section class="mission-vision">
+    <div class="container">
+      <h2>Our Mission</h2>
+      <p>
+        To raise empowered, Spirit-filled believers through Apostolic teaching, prophetic impartation, and transformational programs — bringing salvation, healing, and deliverance to individuals, families, and nations.
+      </p>
+      <h2>Our Vision</h2>
+      <p>
+        To be a global Apostolic and prophetic movement — restoring lives, reviving destinies, and equipping ministers for the end-time harvest through the Word of God, Holy Spirit-led programs, and supernatural power.
+      </p>
+    </div>
+  </section>
+
+  <!-- Doctrinal Beliefs -->
+  <section class="doctrine">
+    <div class="container">
+      <h2>What We Believe</h2>
+      <ul>
+        <li>In One True God—Father, Son, and Holy Spirit.</li>
+        <li>In Jesus Christ, the Savior who died and rose again for us.</li>
+        <li>In the Holy Spirit’s power to sanctify and empower believers.</li>
+        <li>In the Bible as the inspired and final authority of truth.</li>
+        <li>In prophetic and Apostolic calling for edification of the Church.</li>
+        <li>In healing, deliverance, and revival as God’s agenda for restoration.</li>
+        <li>In fulfilling the Great Commission to preach the Gospel worldwide.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Pastor Profile -->
+  <section class="pastor-profile">
+    <div class="container">
+      <h2>Meet Our Pastor</h2>
+      <div class="pastor-box">
+        <img src="{{ url_for('static', filename='images/pastor.jpg') }}" alt="Apostle Joshua Oluseye Olayiwola">
+        <div class="bio">
+          <p>
+            <strong>Apostle Joshua Oluseye Olayiwola</strong> is a visionary leader with a prophetic mandate to equip saints and build spiritual foundations. He has authored impactful books and has ministered across nations including Kenya, the U.S., Uganda, and the U.K.
+          </p>
+          <blockquote>
+            “By grace, we build. By truth, we restore. By the Spirit, we reign.”
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2025 Apostolic Chapel International. All rights reserved.</p>
+    </div>
+  </footer>
+
+ <script type="text/javascript" id="dcoder_script">// Highlight current nav link
+  const links = document.querySelectorAll('nav a');
+  const currentPage = window.location.pathname;
+
+  links.forEach(link => {
+    if (link.getAttribute('href') === currentPage) {
+      link.classList.add('active');
+    }
+  });
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener("click", function(e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute("href")).scrollIntoView({
+        behavior: "smooth"
+      });
+    });
+  });
+
+  // Mobile navbar toggle and auto-close
+  const menuToggle = document.getElementById("menuToggle");
+  const navLinks = document.getElementById("navLinks");
+
+  menuToggle.addEventListener("click", function () {
+    navLinks.classList.toggle("show");
+  });
+
+  document.querySelectorAll("#navLinks a").forEach(link => {
+    link.addEventListener("click", () => {
+      navLinks.classList.remove("show");
+    });
+  });</script></body></html>

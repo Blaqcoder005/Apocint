@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ACI Admin Messages</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <div class="dashboard">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h2>ACI Dashboard</h2>
+      <nav>
+        <ul>
+          <li><a href="/admin">Dashboard</a></li>
+          <li><a href="/admin/messages" class="active">Messages</a></li>
+          <li><a href="/upload">Upload</a></li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>Messages</h1>
+	{% for msg in messages %}
+	  <div class="message-box">
+	    <p><strong>From:</strong> {{ msg.name }}</p>
+	    <p><strong>Email:</strong> {{ msg.email }}</p>
+	    <p><strong>Date:</strong> {{ msg.date_sent }}</p>
+	    <p><strong>Message:</strong><br>{{ msg.message }}</p>
+
+	    <form action="{{ url_for('delete_message', message_id=msg.id) }}" method="POST" style="margin-top: 10px;">
+	      <button type="submit" class="delete-btn" onclick="return confirm('Delete this message?')">🗑 Delete</button>
+	    </form>
+	  </div>
+	{% endfor %}
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Apostolic Chapel International. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
