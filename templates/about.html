@@ -4,410 +4,34 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Us | Apostolic Chapel International</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<style type="text/css" id="dcoder_stylesheet">.hero-banner {
-  background: url('images/hero-bg.jpg') center center / cover no-repeat fixed;
-  padding: 7rem 1rem;
-  color: white;
-  text-align: center;
-  position: relative;
-}
-
-.hero-content {
-  background-color: rgba(0, 0, 0, 0.6);
-  display: inline-block;
-  padding: 2rem 3rem;
-  border-radius: 12px;
-  max-width: 600px;
-  margin: 0 auto;
-  animation: fadeIn 1.5s ease;
-}
-
-.hero-content h2 {
-  font-size: 2.4rem;
-  margin-bottom: 1rem;
-}
-
-.hero-content p {
-  font-size: 1.2rem;
-  margin-bottom: 1.5rem;
-}
-
-/* Optional fade-in effect */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.about {
-  background-color: #ffffff;
-  padding: 4rem 1rem;
-  text-align: center;
-}
-
-.about h2 {
-  color: #0033cc;
-  margin-bottom: 1.5rem;
-}
-
-.sermon {
-  background-color: #f5f8ff;
-  padding: 4rem 1rem;
-  text-align: center;
-}
-
-.sermon h2 {
-  color: #0033cc;
-  margin-bottom: 1rem;
-}
-
-.sermon p {
-  font-size: 1.1rem;
-  margin-bottom: 1.5rem;
-}
-
-/* ===== GENERAL STYLES ===== */
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #f4f7fc;
-  color: #222;
-}
-
-.container {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 0 1rem;
-  text-align: center;
-}
-
-/* ===== NAVIGATION BAR ===== */
-.navbar {
-  background: #0033cc;
-  color: white;
-  padding: 1rem 0;
-}
-
-.navbar .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.navbar .logo img {
-  height: 40px;
-  display: block;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 1.5rem;
-}
-
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-.nav-links a:hover,
-.nav-links a.active {
-  color: #ff0000; /* matches logo text */
-}
-
-.menu-toggle {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 1.8rem;
-  cursor: pointer;
-  display: none;
-}
-
-/* ===== HERO SECTION ===== */
-.hero {
-  background: url('images/image.jpg') center/cover no-repeat;
-  color: white;
-  text-align: center;
-  padding: 5rem 1rem;
-}
-
-.hero-content {
-  background: rgba(0, 0, 0, 0.6);
-  padding: 2rem;
-  border-radius: 10px;
-}
-
-/* ===== BUTTON STYLING ===== */
-.btn {
-  background-color: #0033cc;
-  color: white;
-  padding: 0.8rem 1.6rem;
-  font-size: 16px;
-  border: none;
-  border-radius: 6px;
-  margin-top: 1rem;
-  text-decoration: none;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.btn:hover {
-  background-color: #001f80;
-}
-
-/* ===== SECTIONS ===== */
-.about, .ministries, .sermon {
-  padding: 3rem 1rem;
-  background-color: #fff;
-}
-
-.ministry-cards {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  flex-wrap: wrap;
-  margin-top: 2rem;
-}
-
-.card {
-  background-color: #ecf0f1;
-  padding: 1.5rem;
-  border-radius: 8px;
-  width: 250px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-/* ===== FOOTER ===== */
-footer {
-  background-color: #0033cc;
-  color: white;
-  text-align: center;
-  padding: 1rem;
-  margin-top: 3rem;
-}
-
-footer p {
-  margin: 0;
-}
-
-/* ===== RESPONSIVE NAVBAR ===== */
-@media (max-width: 768px) {
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    gap: 0;
-    position: absolute;
-    top: 60px;
-    left: 0;
-    background: #0033cc;
-    width: 100%;
-    text-align: center;
-  }
-
-  .nav-links.show {
-    display: flex;
-  }
-
-  .menu-toggle {
-    display: block;
-  }
-}
-
-.logo {
-  margin-right: 20px;
-}
-
-.about-history {
-  padding: 3rem 1rem;
-  background-color: #fff;
-  color: #333;
-  text-align: left;
-}
-
-.about-history h2 {
-  color: #0033cc;
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  text-align: center;
-}
-
-.about-history p {
-  font-size: 16px;
-  line-height: 1.8;
-  margin-bottom: 1.2rem;
-}
-
-.about-history .closing-line {
-  font-style: italic;
-  text-align: center;
-  margin-top: 2rem;
-  color: #0033cc;
-}
-
-.mission-vision, .doctrine, .pastor-profile {
-  padding: 3rem 1rem;
-  background-color: #fff;
-  color: #333;
-}
-
-.mission-vision h2, .doctrine h2, .pastor-profile h2 {
-  color: #0033cc;
-  margin-bottom: 1rem;
-}
-
-.doctrine ul {
-  text-align: left;
-  max-width: 800px;
-  margin: 0 auto;
-  padding-left: 20px;
-}
-
-.doctrine ul li {
-  margin-bottom: 0.8rem;
-  line-height: 1.6;
-  list-style: disc;
-}
-
-.pastor-box {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 2rem;
-  margin-top: 2rem;
-  justify-content: center;
-}
-
-.pastor-box img {
-  width: 200px;
-  height: auto;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-
-.pastor-box .bio {
-  max-width: 600px;
-  text-align: left;
-}
-
-.pastor-box blockquote {
-  font-style: italic;
-  color: #cc0000;
-  margin-top: 1rem;
-  border-left: 4px solid #cc0000;
-  padding-left: 1rem;
-}
-/* Mission, Vision, and Doctrine */
-.mission-vision, .doctrine, .about-history, .pastor-profile {
-  padding: 3rem 1rem;
-  background-color: #fff;
-  color: #333;
-  text-align: left;
-}
-
-.mission-vision h2, .doctrine h2, .about-history h2, .pastor-profile h2 {
-  color: #0033cc;
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-
-.doctrine ul {
-  max-width: 800px;
-  margin: 0 auto;
-  padding-left: 20px;
-  list-style: disc;
-}
-
-.doctrine ul li {
-  margin-bottom: 0.8rem;
-  line-height: 1.6;
-}
-
-/* Pastor Profile */
-.pastor-box {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 2rem;
-  justify-content: center;
-  margin-top: 2rem;
-}
-
-.pastor-box img {
-  width: 220px;
-  height: auto;
-  border-radius: 10px;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
-}
-
-.pastor-box .bio {
-  max-width: 600px;
-}
-
-.pastor-box blockquote {
-  font-style: italic;
-  color: #cc0000;
-  margin-top: 1rem;
-  border-left: 4px solid #cc0000;
-  padding-left: 1rem;
-}
-
-/* Hero Banner */
-.hero-banner {
-  background: url('images/hero-bg.jpg') center center / cover no-repeat fixed;
-  padding: 6rem 1rem;
-  color: white;
-  text-align: center;
-}
-
-.hero-content {
-  background-color: rgba(0,0,0,0.5);
-  display: inline-block;
-  padding: 2rem 3rem;
-  border-radius: 10px;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.hero-content h2 {
-  font-size: 2.4rem;
-  margin-bottom: 1rem;
-}
-
-.hero-content p {
-  font-size: 1.2rem;
-}</style></head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='frontend.css') }}">
+</head>
+<button id="scrollTopBtn" title="Back to Top">↑</button>
 <body>
 
   <!-- Navigation -->
   <header class="navbar">
     <div class="container">
       <div class="logo">
-        <a href="index.html">
-          <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Church Logo">
-        </a>
       </div>
       <button class="menu-toggle" id="menuToggle">☰</button>
       <ul class="nav-links" id="navLinks">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html" class="active">About</a></li>
-        <li><a href="sermons.html">Sermons</a></li>
-        <li><a href="events.html">Events</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about" class="active">About</a></li>
+        <li><a href="/sermons">Sermons</a></li>
+        <li><a href="/event">Events</a></li>
+        <li><a href="/contact">Contact</a></li>
       </ul>
     </div>
   </header>
 
-  <!-- Hero Section -->
+ <div class="overlay">
   <section class="hero-banner">
     <div class="hero-content">
       <h2>About Apostolic Chapel Int'l</h2>
-      <p>Habitation of Grace — A Global Apostolic &amp; Prophetic Movement</p>
+      <p>(Habitation of Grace)</p>
     </div>
   </section>
-
   <!-- Who We Are -->
   <section class="about-history">
     <div class="container">
@@ -428,7 +52,7 @@ footer p {
   </section>
 
   <!-- Mission & Vision -->
-  <section class="mission-vision">
+  <section class="mission">
     <div class="container">
       <h2>Our Mission</h2>
       <p>
@@ -460,21 +84,20 @@ footer p {
   <!-- Pastor Profile -->
   <section class="pastor-profile">
     <div class="container">
-      <h2>Meet Our Pastor</h2>
+      <h2>About the Founder</h2>
       <div class="pastor-box">
-        <img src="{{ url_for('static', filename='images/pastor.jpg') }}" alt="Apostle Joshua Oluseye Olayiwola">
+        <img src="{{ url_for('static', filename='pastor.jpg') }}" alt="Apostle Joshua Oluseye Olayiwola">
         <div class="bio">
           <p>
             <strong>Apostle Joshua Oluseye Olayiwola</strong> is a visionary leader with a prophetic mandate to equip saints and build spiritual foundations. He has authored impactful books and has ministered across nations including Kenya, the U.S., Uganda, and the U.K.
           </p>
           <blockquote>
             “By grace, we build. By truth, we restore. By the Spirit, we reign.”
-          </blockquote>
+a1qa          </blockquote>
         </div>
       </div>
     </div>
   </section>
-
   <!-- Footer -->
   <footer>
     <div class="container">
@@ -482,8 +105,16 @@ footer p {
     </div>
   </footer>
 
- <script type="text/javascript" id="dcoder_script">// Highlight current nav link
-  const links = document.querySelectorAll('nav a');
+ <script type="text/javascript" id="dcoder_script">
+  const scrollBtn = document.getElementById("scrollTopBtn");
+  window.addEventListener("scroll", () => {
+    scrollBtn.style.display = window.scrollY > 100 ? "block" : "none";
+  });
+  scrollBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+ const links = document.querySelectorAll('nav a');
   const currentPage = window.location.pathname;
 
   links.forEach(link => {

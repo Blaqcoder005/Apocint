@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: Apostolic-Chapel-app
+    env: python
+    buildCommand: ""
+    startCommand: python apocint.py
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: PORT
+        value: 10000

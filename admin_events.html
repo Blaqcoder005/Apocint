@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Admin Panel</title> 
+  <link rel="stylesheet" href="your-stylesheet.css"> 
+ </head> 
+ <body> <!-- Menu Toggle Button --> <button class="menu-toggle" id="menuToggle"> <span></span> <span></span> <span></span> </button> <!-- Sidebar --> 
+  <aside class="sidebar" id="sidebar"> 
+   <h2>Admin Panel</h2> 
+   <ul> 
+    <li><a href="#" class="active">Dashboard</a></li> 
+    <li><a href="/">messages</a></li> 
+    <li><a href="/admin/sermons">Manage Sermons</a></li>
+<li><a href="/admin/events">Manage Events</a></li>
+    <li><a href="#">Uploads</a></li> 
+    <li><a href="#">Log Out</a></li> 
+   </ul> 
+  </aside> <!-- Main Content --> 
+  <main class="main-content" id="mainContent"> 
+  <h2>Uploaded Events</h2>
+  <div class="ministry-cards">
+    {% for event in events %}
+    <div class="card">
+      <h3>{{ event.title }}</h3>
+      <p><strong>Date:</strong> {{ event.event_date }}</p>
+      <p>{{ event.description }}</p>
+      <form action="{{ url_for('delete_event', event_id=event.id) }}" method="POST">
+        <button type="submit" onclick="return confirm('Delete this event?')">Delete</button>
+      </form>
+    </div>
+    {% endfor %}
+  </div>   
+  </main> 
+  <script src="your-script.js"></script> 
+ </body>
+</html>

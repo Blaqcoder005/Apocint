@@ -1,0 +1,495 @@
+.parallax-section {
+  background: url('static/background.jpg') center center / cover no-repeat fixed;
+  color: white;
+  position: relative;
+}
+.parallax-section h2 {
+  color: #0033cc;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.ministry-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  animation: fadein 1.5s ease;
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent */
+  color: #000;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  width: 250px;
+  transition: transform 0.3s ease;
+  animation: fadein 1.5s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+/* ===== GENERAL STYLES ===== */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: url('../static/optimized-background.jpg') center center / cover no-repeat fixed;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  text-align: center;
+  color: #fff;
+  animation: fadein 1.5s ease;
+}
+
+.container h2 {
+  color: #0033cc;
+}
+
+
+.containner ul {
+  color: white
+}
+
+/* ===== NAVIGATION BAR ===== */
+.navbar {
+  background: #3366cc;
+  color: white;
+  padding: 1rem 0;
+}
+
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar .logo img {
+  height: 40px;
+  display: block;
+}
+
+.nav-links {
+  list-style: none;
+  background: #0033cc;
+  position: absolute;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  padding: 1rem 0;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.4s ease;
+  z-index: 99;
+}
+
+.nav-links.show {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nav-links li {
+  margin: 10px 0;
+}
+
+.nav-links a {
+  color: white;
+  font-size: 1.1rem;
+  text-decoration: none;
+}
+
+.menu-toggle {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  display: none;
+}
+
+/* Show toggle button only on mobile */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    display: none; /* hide by default */
+    flex-direction: column;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+}
+.nav-links a:hover,
+.nav-links a.active {
+  color: #ff0000;
+}
+
+.menu-toggle {
+  background-color: #0033cc;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: none;
+}
+
+/* ===== HERO SECTION ===== */
+.hero {
+  background: url('images/image.jpg') center/cover no-repeat;
+  color: white;
+  text-align: center;
+  padding: 5rem 1rem;
+}
+
+.hero-content {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+/* ===== BUTTON STYLING ===== */
+.btn {
+  background-color: #0033cc;
+  color: white;
+  padding: 0.8rem 1.6rem;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  margin-top: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #001f80;
+}
+
+/* ===== SECTIONS ===== */
+.about, .ministries, .sermon {
+  padding: 3rem 1rem;
+  background: rgba(0, 0, 0, 0.6);
+  justify-item: center;
+  text-align: center;
+}
+
+
+/* ===== FOOTER ===== */
+footer {y;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 3rem;
+}
+
+footer p {
+  margin: 0;
+}
+
+/* ===== RESPONSIVE NAVBAR ===== */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background: #0033cc;
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+}
+
+.logo {
+  margin-right: 20px;
+}
+
+.hero-banner {
+  background: url('image/hero-bg.png') center center / cover no-repeat fixed;
+  padding: 7rem 1rem;
+  color: white;
+  text-align: center;
+  position: relative;
+}
+
+.hero-content {
+  background-color: rgba(0, 0, 0, 0.6);
+  display: inline-block;
+  padding: 2rem 3rem;
+  border-radius: 12px;
+  max-width: 600px;
+  margin: 0 auto;
+  animation: fadeIn 1.5s ease;
+}
+
+.hero-content h2 {
+  font-size: 2.4rem;
+  margin-bottom: 1rem;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Optional fade-in effect */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.about {
+  background-color: #ffffff;
+  padding: 4rem 1rem;
+  text-align: center;
+}
+
+.about h2 {
+  color: #0033cc;
+  margin-bottom: 1.5rem;
+}
+
+.sermon {
+  background-color: #f5f8ff;
+  padding: 4rem 1rem;
+  text-align: center;
+}
+
+.sermon h2 {
+  color: #0033cc;
+  margin-bottom: 1rem;
+}
+
+.about, .mission, .doctrine p {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  colour: #fff;
+}
+
+
+/* ===== LOGO ===== */
+.logo {
+  margin-right: 20px;
+  width: 150px;
+  height: 80px;
+  background: url("../static/image.png") no-repeat center center;
+  background-size: contain;
+}
+
+
+/* Container for the form */
+.reach_out {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Form Heading */
+.reach_out h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-size: 28px;
+}
+
+/* Form Input Fields */
+.reach_out input[type="text"],
+.reach_out input[type="email"],
+.reach_out textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.reach_out textarea {
+    height: 150px;
+    resize: vertical;
+}
+
+/* Send Button */
+.reach_out button {
+    background-color: #0033cc;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+.reach_out button:hover {
+    background-color: #1a252f;
+}
+
+/* Footer Styling */
+footer {
+  color: white;
+  text-align: center;
+  padding: 2rem 1rem;
+  margin-top: 4rem;
+}
+
+.events-section {
+  padding: 3rem 1rem;
+  background: #f5f8ff;
+  text-align: center;
+}
+
+.event-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.event-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  width: 300px;
+  text-align: left;
+  transition: transform 0.3s ease;
+}
+
+.event-card:hover {
+  transform: translateY(-5px);
+}
+
+.event-card h3 {
+  color: #0033cc;
+  margin-bottom: 0.5rem;
+}
+
+.event-meta {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.event-date {
+  display: block;
+  font-weight: bold;
+  color: #0095ff;
+}
+
+.event-location {
+  display: block;
+  margin-top: 0.3rem;
+}
+
+.overlay {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+.doctrine ul {
+  text-align: left;
+  max-width: 800px;
+  margin: 0 auto;
+  padding-left: 20px;
+}
+
+.pastor-box {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 2rem;
+  justify-content: center;
+}
+
+.pastor-box img {
+  width: 200px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.pastor-box .bio {
+  max-width: 600px;
+  text-align: left;
+}
+
+.pastor-box blockquote {
+  font-style: italic;
+  color: #0095ff;
+  margin-top: 1rem;
+  border-left: 4px solid #cc0000;
+  padding-left: 1rem;
+}
+
+.doctrine ul {
+  max-width: 800px;
+  margin: 0 auto;
+  padding-left: 20px;
+  list-style: disc;
+  colour: white;
+}
+
+.doctrine ul li {
+  margin-bottom: 0.8rem;
+  line-height: 1.6;
+  colour: #fff;
+}
+
+/* Pastor Profile */
+.pastor-box {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.pastor-box img {
+  width: 220px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+.pastor-box .bio {
+  max-width: 600px;
+}
+
+.pastor-box blockquote {
+  font-style: italic;
+  color: #0095ff;
+  margin-top: 1rem;
+  border-left: 4px solid #cc0000;
+  padding-left: 1rem;
+}

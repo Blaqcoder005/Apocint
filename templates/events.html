@@ -1,206 +1,46 @@
+
 <!doctype html>
-<html lang="en"> 
- <head> 
-  <meta charset="UTF-8"> 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-  <title>Apostolic Chapel International | Habitation of Grace</title> 
-  <link rel="stylesheet" href="style.css"> 
- <style type="text/css" id="dcoder_stylesheet">/* ===== GENERAL STYLES ===== */
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #f4f7fc;
-  color: #222;
-}
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apostolic Chapel International | Habitation of Grace</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='frontend.css') }}">
+  </head>
+ <body> <!-- Navigation -->
+  <header class="navbar">
+    <div class="container">
+     <div class="logo"></div> <button class="menu-toggle" id="menuToggle">☰</button>
+     <ul class="nav-links" id="navLinks">
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/sermons">Sermons</a></li>
+      <li><a href="/event">Events</a></li>
+      <li><a href="/contact">Contact</a></li>
+     </ul>
+    </div>
+  </header> <!-- Ministries Section -->
+  <body>
+   <section class="ministries">
+    <div class="container">
+        <h1>Upcoming Events</h1>
 
-.container {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 0 1rem;
-  text-align: center;
-}
-
-/* ===== NAVIGATION BAR ===== */
-.navbar {
-  background: #0033cc;
-  color: white;
-  padding: 1rem 0;
-}
-
-.navbar .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.navbar .logo img {
-  height: 40px;
-  display: block;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 1.5rem;
-}
-
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-.nav-links a:hover,
-.nav-links a.active {
-  color: #ff0000; /* matches logo text */
-}
-
-.menu-toggle {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 1.8rem;
-  cursor: pointer;
-  display: none;
-}
-
-/* ===== HERO SECTION ===== */
-.hero {
-  background: url('images/image.jpg') center/cover no-repeat;
-  color: white;
-  text-align: center;
-  padding: 5rem 1rem;
-}
-
-.hero-content {
-  background: rgba(0, 0, 0, 0.6);
-  padding: 2rem;
-  border-radius: 10px;
-}
-
-/* ===== BUTTON STYLING ===== */
-.btn {
-  background-color: #0033cc;
-  color: white;
-  padding: 0.8rem 1.6rem;
-  font-size: 16px;
-  border: none;
-  border-radius: 6px;
-  margin-top: 1rem;
-  text-decoration: none;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.btn:hover {
-  background-color: #001f80;
-}
-
-/* ===== SECTIONS ===== */
-.about, .ministries, .sermon {
-  padding: 3rem 1rem;
-  background-color: #fff;
-}
-
-.ministry-cards {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  flex-wrap: wrap;
-  margin-top: 2rem;
-}
-
-.card {
-  background-color: #ecf0f1;
-  padding: 1.5rem;
-  border-radius: 8px;
-  width: 250px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-/* ===== FOOTER ===== */
-footer {
-  background-color: #0033cc;
-  color: white;
-  text-align: center;
-  padding: 1rem;
-  margin-top: 3rem;
-}
-
-footer p {
-  margin: 0;
-}
-
-/* ===== RESPONSIVE NAVBAR ===== */
-@media (max-width: 768px) {
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    gap: 0;
-    position: absolute;
-    top: 60px;
-    left: 0;
-    background: #0033cc;
-    width: 100%;
-    text-align: center;
-  }
-
-  .nav-links.show {
-    display: flex;
-  }
-
-  .menu-toggle {
-    display: block;
-  }
-}
-
-.logo {
-  margin-right: 20px;
-}</style></head> 
- <body> <!-- Navigation --> 
-  <header class="navbar"> 
-   <h1>APOSTOLIC CHAPEL INT'L | Habitation of Grace</h1> 
-   <nav class="navbar"> 
-    <div class="container"> 
-     <div class="logo"> <a href="index.html"> <img src="logo.png" alt="Church Logo" height="40"> </a> 
-     </div> <button class="menu-toggle" id="menuToggle">☰</button> 
-     <ul class="nav-links" id="navLinks"> 
-      <li><a href="index.html">Home</a></li> 
-      <li><a href="about.html">About</a></li> 
-      <li><a href="sermons.html">Sermons</a></li> 
-      <li><a href="events.html">Events</a></li> 
-      <li><a href="contact.html">Contact</a></li> 
-     </ul> 
-    </div> 
-   </nav> 
-  </header> <!-- Ministries Section --> 
-  <section class="ministries"> 
-   <div class="container"> 
-    <h2>Upcoming Events (2025)</h2> 
-    <div class="ministry-cards"> 
-     <div class="card"> 
-      <h3>Prayer Conference 2025</h3> 
-      <p>March 16–18 | 10am Daily | Church Auditorium</p> 
-     </div> 
-     <div class="card"> 
-      <h3>Youth Praise Night</h3> 
-      <p>April 2 | 6pm | With Guest Ministers</p> 
-     </div> 
-     <div class="card"> 
-      <h3>Easter Sunday Service</h3> 
-      <p>April 20 | 9am | Resurrection Celebration</p> 
-     </div> 
-    </div> 
-   </div> 
-  </section> <!-- Footer --> 
-  <footer> 
-   <div class="container"> 
-    <p>© 2025 Apostolic Chapel International. All rights reserved.</p> 
-   </div> 
-  </footer> 
- 
-<script type="text/javascript" id="dcoder_script">// Highlight active page link
+        {% if events %}
+        <div class="ministry-cards">
+            {% for event in events %}
+            <div class="card">
+                <h3>{{ event.title }}</h3>
+                <p><strong>Date:</strong> {{ event.event_date }}</p>
+                <p>{{ event.description }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="no-events">No events uploaded yet.</p>
+        {% endif %}
+    </div>
+  </section>
+<script type="text/javascript" id="dcoder_script">
   const links = document.querySelectorAll('nav a');
   const currentPage = window.location.pathname;
 
@@ -210,7 +50,6 @@ footer p {
     }
   });
 
-  // Smooth scroll
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener("click", function(e) {
       e.preventDefault();
@@ -220,7 +59,20 @@ footer p {
     });
   });
 
-  // Hamburger menu toggle
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('appear');
+      }
+    });
+  }, {
+    threshold: 0.1
+  });
+
+  document.querySelectorAll('.fade-in').forEach(el => {
+    observer.observe(el);
+  });
+
   const menuToggle = document.getElementById("menuToggle");
   const navLinks = document.getElementById("navLinks");
 
@@ -228,9 +80,10 @@ footer p {
     navLinks.classList.toggle("show");
   });
 
-  // Auto-close when a link is clicked
   document.querySelectorAll("#navLinks a").forEach(link => {
     link.addEventListener("click", () => {
       navLinks.classList.remove("show");
     });
-  });</script></body></html>
+  });</script>
+</body>
+</html>

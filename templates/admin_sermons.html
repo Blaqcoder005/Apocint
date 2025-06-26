@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -7,12 +7,12 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-  <body> <button class="menu-toggle" id="menuToggle"> <span></span> <span></span> <span></span> </button> 
+  <body> <button class="menu-toggle" id="menuToggle"> <span></span> <span></span> <span></span> </button>
   <div class="dashboard">
     <aside class="sidebar">
       <h2>ACI Dashboard</h2>
       <nav>
-        <ul> 
+        <ul>
           <li><a href="/dashboard">Dashboard</a></li>
           <li><a href="/admin/messages">Messages</a></li>
           <li><a href="/admin/sermons">Manage Sermons</a></li>
@@ -25,15 +25,26 @@
 
     <!-- Main content on the right -->
     <main class="main-content">
-      <h1>Latest Messages</h1>
-
-      <div class="message-box">
-        <p><strong>From:</strong> John Doe</p>
-        <p><strong>Message:</strong> Hello Pastor, thank you for last Sunday!</p>
-      </div>
-      <!-- You can loop through more messages here -->
+     <section class="manage-sermons">
+  <h2>Uploaded Sermons</h2>
+  <div class="ministry-cards">
+    {% for sermon in sermons %}
+    <div class="card">
+      <h3>{{ sermon.title }}</h3>
+      <audio controls>
+        <source src="{{ url_for('static', filename='sermons/' + sermon.filename) }}" type="audio/mpeg">
+      </audio>
+      <form action="{{ url_for('delete_sermon', sermon_id=sermon.id) }}" method="POST">
+        <button type="submit" onclick="return confirm('Are you sure you want to delete this sermon?')">Delete</button>
+      </form>
+    </div>
+    {% endfor %}
+  </div>
+</section>
     </main>
   </div>
   <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
+
+

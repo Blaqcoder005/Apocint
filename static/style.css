@@ -1,9 +1,52 @@
-.dashboard {
-  display: flex;
-  min-height: 100vh;
-  font-family: 'Segoe UI', sans-serif;
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+body {
+  font-family: "Poppins", sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  overflow-x: hidden;
+}
+
+/* ===== MENU TOGGLE ===== */
+.menu-toggle {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1001;
+  background: #0095ff;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 36px;
+  height: 30px;
+}
+
+.menu-toggle span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: white;
+  border-radius: 3px;
+  transition: 0.3s ease;
+}
+
+/* ===== DASHBOARD LAYOUT ===== */
+.dashboard {
+  display: flex;
+}
+
+/* ===== SIDEBAR ===== */
 .sidebar {
   width: 250px;
   background-color: #222;
@@ -13,184 +56,109 @@
   position: fixed;
   top: 0;
   left: 0;
+  transition: transform 0.3s ease;
+  z-index: 1000;
 }
 
 .sidebar h2 {
-  font-size: 20px;
+  color: #0095ff;
   margin-bottom: 20px;
 }
 
-.sidebar ul {
+.sidebar nav ul {
   list-style: none;
-  padding: 0;
 }
 
-.sidebar ul li {
+.sidebar nav ul li {
   margin-bottom: 15px;
 }
 
-.sidebar ul li a {
+.sidebar nav ul li a {
   color: white;
   text-decoration: none;
-  padding: 8px 12px;
+  padding: 10px 12px;
   display: block;
   border-radius: 5px;
-  transition: background 0.3s;
-}
-
-.sidebar ul li a:hover,
-.sidebar ul li a.active {
-  background-color: #0095FF;
-}
-
-.main-content {
-  margin-left: 250px;
-  padding: 40px 30px;
-  flex: 1;
-  background-color: #f5f7fa;
-}
-
-.main-content h1 {
-  font-size: 28px;
-  margin-bottom: 30px;
-  color: #222;
-}
-
-.message-box {
-  background: white;
-  padding: 20px;
-  margin-bottom: 20px;
-  border-left: 5px solid #0095FF;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-}
-
-.message-box p {
-  margin: 6px 0;
-  font-size: 16px;
-  color: #333;
-}
-
-.delete-btn,
-.upload-btn {
-  background-color: #e74c3c;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  font-size: 14px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.3s;
-  margin-top: 10px;
-}
-
-.delete-btn:hover {
-  background-color: #c0392b;
-}
-
-.upload-btn {
-  background-color: #0095FF;
-}
-
-.upload-btn:hover {
-  background-color: #0077cc;
-}
-
-@media (max-width: 768px) {
-  .dashboard {
-    flex-direction: column;
-  }
-
-  .sidebar {
-    width: 100%;
-    height: auto;
-    position: relative;
-  }
-
-  .main-content {
-    margin-left: 0;
-    padding: 20px;
-  }
-
-@media (max-width: 768px) {
-  .dashboard {
-    flex-direction: column;
-  }
-
-  .sidebar {
-    width: 100%;
-    height: auto;
-    position: relative;
-  }
-
-  .main-content {
-    margin-left: 0;
-    padding: 20px;
-  }
-
-
-
-.login-box input::placeholder {
-  color: #7dd3fc;
-}
-
-.login-box a {
-  display: block;
-  font-size: 12px;
-  color: #7dd3fc;
-  margin-bottom: 15px;
-  text-align: right;
-  text-decoration: none;
-}
-
-
-.login-box button {
-  width: 100%;
-  padding: 12px;
-  background-color: #00f2fe;
-  color: #0f172a;
-  font-weight: bold;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
   transition: background 0.3s ease;
 }
 
-.button:hover {
-  background-color: #7dd3fc;
+.sidebar nav ul li a:hover {
+  background-color: #0095ff;
 }
 
-
-.login-box p {
-  margin-top: 15px;
-  color: #7dd3fc;
-  font-size: 14px;
+/* ===== MAIN CONTENT ===== */
+.main-content {
+  margin-left: 250px;
+  padding: 40px 20px;
+  flex: 1;
+  transition: margin 0.3s ease;
 }
 
-
+.upload-sermon {
+  margin-bottom: 2rem;
 }
 
-body { margin: 0; padding: 0; height: 100vh; background-color: #0f172a; display: flex; 
-  justify-content: center; align-items: center; font-family: Arial, sans-serif;
-}
-.ring { position: absolute; width: 300px; height: 300px; border-radius: 50%; animation: spin 
-  4s linear infinite; background: conic-gradient(
-    from 0deg,
-    #00f2fe 0%, 4facfe 25%, 00f2fe 50%, 4facfe 75%, 00f2fe 100%
-  ); -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 12px), black 
-  calc(100% - 10px> mask: radial-gradient(farthest-side, transparent calc(100% - 12px), black 
-  calc(100% - 10px));
-}
-@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); }
-}
-.login-box { position: relative; background-color: #1e293b; padding: 30px; border-radius: 
-  20px; box-shadow: 0 0 25px rgba(0, 255, 255, 0.3); width: 320px; z-index: 10; text-align: 
-  center;
-}
-.login-box h2 { color: #00f2fe; font-size: 28px; margin-bottom: 20px;
-}
-.login-box input[type="username"], .login-boxinput[type="password"] { width: 100%; padding: 
-  12px 18px; margin-bottom: 15px; border: 1px solid #00f2fe; border-radius: 30px; 
-  background-color: transparent; color: white; font-size: 14px;
+.upload-sermon h2 {
+  margin-bottom: 1rem;
 }
 
+.upload-sermon input,
+.upload-sermon button {
+  display: block;
+  margin-bottom: 1rem;
+  padding: 10px;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.upload-sermon button {
+  background-color: #0095ff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.upload-sermon button:hover {
+  background-color: #007acc;
+}
+
+/* ===== EVENT CARDS ===== */
+.ministry-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.card {
+  background-color: #f4f4f4;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  width: 250px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: flex;
+  }
+
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding: 80px 20px 20px;
+  }
+
+  .main-content.expanded {
+    margin-left: 0;
+  }
+}
