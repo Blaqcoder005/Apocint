@@ -1,101 +1,93 @@
-# Apostolic Chapel International | Habitation of Grace 🌍✝️
+➡️Apostolic Chapel International – Habitation of Grace 🌍⛪
 
-This is the official web application for *Apostolic Chapel International*, built with:
+This is the official website for Apostolic Chapel International {Habitation of Grace}, built to represent the Church's vision, history, ministries, sermons, and events online.
 
-- 🔥 Flask (Python)
-- 🖼️ HTML, CSS (Responsive & Optimized)
-- 🛢️ MariaDB / MySQL for data storage
-- 📦 Admin panel for managing sermons, events, and messages
+➡️ 🔧 Tech Stack
 
----
+- Frontend: HTML, CSS (Custom & Responsive), JavaScript
+- Backend: Python (Flask)
+- Database: MariaDB (MySQL)
+- Hosting/Deployment: Termux (Localhost), GitHub, Render
 
-## 🚀 Features
+➡️ 📁 Project Structure
 
-- ✅ Dynamic sermon and event uploads from admin panel
-- ✅ Contact form with DB integration
-- ✅ Mobile-responsive frontend with optimized UI
-- ✅ Sermon audio support
-- ✅ Event display & countdown-ready
-- ✅ Admin authentication + message deletion (WIP)
+Apocimt/
+├── static/                  
+│   ├── style.css
+│   ├── frontend.css
+│   ├── optimized-background.jpg
+│   ├── pastor.jpg
+│   └── ...
+├── templates/              
+│   ├── home.html
+│   ├── about.html
+│   ├── events.html
+│   ├── contact.html
+│   ├── sermon.html
+│   └── admin/             
+│       ├── admin.html
+│       ├── admin_uploads.html
+│       ├── admin_events.html
+│       └── admin_sermons.html
+├── apocint.py              
+├── requirements.txt
+└── render.yaml             
+
+💡 Features
+
+🔥 Home page with parallax design and welcome banner
+
+📖 About page with church history, doctrine, and pastor profile
+
+🎧 Sermons section with latest uploads and audio player
+
+📅 Events section showing upcoming church programs
+
+📨 Contact form with server-side form validation and database integration
+
+🔐 Admin Panel for managing messages, sermons, and events
 
 
-## 🧑‍💻 Developer Setup
+📥 Installation & Running
 
-### 1. Clone the Repo
+Local Setup (via Termux or Linux)
 
-```bash
-git clone https://github.com/Blaqcoder005/Apocint.git
-cd Apocint
+1. Clone the repository:
 
-2. Install Requirements
+git clone https://github.com/Blaqcoder005/Apocimt.git
+cd Apocimt
+
+
+2. Install dependencies:
 
 pip install -r requirements.txt
 
-3. Setup Database
 
--- Inside MariaDB/MySQL
-CREATE DATABASE apocint_db;
-
--- Create required tables (messages, sermons, events)
-
-4. Run the Server
+3. Start the development server:
 
 python apocint.py
-# or if using Termux: flask run --host=0.0.0.0 --port=2000
-
-Then visit:
-
-http://127.0.0.1:2000 or http://your_local_ip:2000
 
 
----
+4. Access it:
 
-📁 Project Structure
-
-Apocint/
-│
-├── templates/            # HTML files
-├── static/               # CSS, JS, images
-├── apocint.py            # Main Flask app
-├── requirements.txt
-└── README.md             # This file
-
-
----
-
-🌐 Deployment
-
-Supports deployment on:
-
-Render.com (via GitHub integration + render.yaml)
-
-Ngrok (for local exposure)
-
-Railway / Heroku / VPS (optional)
+Visit http://localhost:2000 or your mobile IP if accessing from another device.
 
 
 
----
+Deployment (Render)
 
-🙏 Acknowledgements
-
-Built with ❤️ in Termux + Dcoder + Chrome
-
-UI inspired by Systeme.io
+This project includes a render.yaml file for automated deployment using Render.com.
 
 
+📌 Notes
+
+The database must be set up with sermons, events, and messages tables.
+
+Admin uploads are handled via custom dashboard routes.
 
 
+🙏 Special Thanks
 
-📫 Contact
+To everyone contributing or helping behind the scenes to make the vision of Apostolic Chapel Int'l digital a reality.
 
-For ministry inquiries or questions:
-
-✉️ contact@apostolicchapel.org
-🌐 https://apostolicchapel.org
-
-
----
-
-> “Habitation of Grace”
 
