@@ -6,7 +6,6 @@
   <title>About Us | Apostolic Chapel International</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='frontend.css') }}">
 </head>
-<button id="scrollTopBtn" title="Back to Top">↑</button>
 <body>
 
   <!-- Navigation -->
@@ -106,13 +105,7 @@ a1qa          </blockquote>
   </footer>
 
  <script type="text/javascript" id="dcoder_script">
-  const scrollBtn = document.getElementById("scrollTopBtn");
-  window.addEventListener("scroll", () => {
-    scrollBtn.style.display = window.scrollY > 100 ? "block" : "none";
-  });
-  scrollBtn.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+
 
  const links = document.querySelectorAll('nav a');
   const currentPage = window.location.pathname;
