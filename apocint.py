@@ -10,6 +10,7 @@ from flask import session
 from flask_login import login_user
 import mysql.connector
 from werkzeug.utils import secure_filename
+import pg8000
 
 load_dotenv(dotenv_path="/data/data/com.termux/files/home/Apocimt/apocint.env")
 
@@ -38,7 +39,7 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSION
 
 def get_db_connection():
-    return mysql.connector.connect(
+    return pg8000.connect(
         host=os.getenv("DB_HOST"),
         user=os.getenv("DB_USER"),
         password=os.getenv("DB_PASS"),
@@ -50,16 +51,21 @@ def get_db_connection():
 @app.route('/')
 def home():
     conn = get_db_connection()
-    cursor = conn.cursor(dictionary=True)
+    cursor = conn.cursor()
 
-    # Get latest sermon
-    cursor.execute("SELECT * FROM sermons ORDER BY id  DESC LIMIT 1")
+    # Latest sermon
+    cursor.execute("SELECT * FROM sermons ORDER BY id DESC LIMIT 1")
+    sermon_columns = [desc[0] for desc in cursor.description]
     latest_sermon = cursor.fetchone()
+    latest_sermon = dict(zip(sermon_columns, latest_sermon)) if latest_sermon else None
 
-    # Get next upcoming event
+    # Upcoming event
     cursor.execute("SELECT * FROM events ORDER BY event_date ASC LIMIT 1")
+    event_columns = [desc[0] for desc in cursor.description]
     upcoming_event = cursor.fetchone()
+    upcoming_event = dict(zip(event_columns, upcoming_event)) if upcoming_event else None
 
+    cursor.close()
     conn.close()
 
     return render_template('home.html', latest_sermon=latest_sermon, upcoming_event=upcoming_event)
@@ -96,14 +102,18 @@ def contact():
 @app.route('/sermons')
 def sermons():
     conn = get_db_connection()
-    cursor = conn.cursor(dictionary=True)
+    cursor = conn.cursor()
+
     cursor.execute("SELECT * FROM sermons ORDER BY uploaded_at DESC")
-    sermons = cursor.fetchall()
+    columns = [desc[0] for desc in cursor.description]
+    rows = cursor.fetchall()
+
+    sermons = [dict(zip(columns, row)) for row in rows]
+
     cursor.close()
     conn.close()
 
     return render_template('sermon.html', sermon_files=sermons)
-
 
 @app.route('/event')
 def event():
@@ -246,10 +256,17 @@ def upload_event():
 @app.route('/admin/sermons')
 def admin_sermons():
     conn = get_db_connection()
-    cursor = conn.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM sermons ORDER BY id DESC")
-    sermons = cursor.fetchall()
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM sermons ORDER BY uploaded_at DESC")
+    columns = [desc[0] for desc in cursor.description]
+    rows = cursor.fetchall()
+
+    sermons = [dict(zip(columns, row)) for row in rows]
+
+    cursor.close()
     conn.close()
+
     return render_template('admin_sermons.html', sermons=sermons)
 
 @app.route('/delete/sermon/<int:sermon_id>', methods=['POST'])
@@ -266,10 +283,16 @@ def delete_sermon(sermon_id):
 @app.route('/admin/events')
 def admin_events():
     conn = get_db_connection()
-    cursor = conn.cursor(dictionary=True)
+    cursor = conn.cursor()
+    
     cursor.execute("SELECT * FROM events ORDER BY event_date DESC")
-    events = cursor.fetchall()
+    rows = cursor.fetchall()
+    columns = [desc[0] for desc in cursor.description]
+    events = [dict(zip(columns, row)) for row in rows]
+
+    cursor.close()
     conn.close()
+
     return render_template('admin_events.html', events=events)
 
 @app.route('/delete/event/<int:event_id>', methods=['POST'])
@@ -291,9 +314,14 @@ def admin_messages():
         return redirect(url_for('login'))
 
     conn = get_db_connection()
-    cursor = conn.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM messages ORDER BY date_sent DESC")
-    messages = cursor.fetchall()
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM messages ORDER BY created_at DESC")
+    columns = [desc[0] for desc in cursor.description]
+    rows = cursor.fetchall()
+
+    messages = [dict(zip(columns, row)) for row in rows]
+
     cursor.close()
     conn.close()
 
@@ -332,6 +360,11 @@ def test_db():
         return f"Connected! Tables: {[table[0] for table in tables]}"
     except Exception as e:
         return f"Database connection failed: {e}"
+
+@app.route('/logout')
+def logout():
+    session.pop("username", None)
+    return redirect(url_for("home"))
 
 # === Run Server ===
 if __name__ == '__main__':
