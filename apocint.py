@@ -157,6 +157,8 @@ def login():
         else:
             failed_logins[ip].append(current_time)
             return "Invalid credentials", 401
+        print("USERNAME:", ADMIN_USERNAME)
+        print("PASSWORD:", ADMIN_PASSWORD)
 
     return render_template("login.html")
 
