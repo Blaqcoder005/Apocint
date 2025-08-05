@@ -16,6 +16,7 @@
           <li><a href="/admin/messages">Messages</a></li>
           <li><a href="/admin/sermons">Manage Sermons</a></li>
           <li><a href="/admin/events">Manage Events</a></li>
+          <li><a href="/admin/resources">Books</a></li>
           <li><a href="/upload">Upload</a></li>
           <li><a href="/logout">Logout</a></li>
         </ul>
@@ -26,19 +27,71 @@
     <main class="main-content">
      <section class="manage-sermons">
   <h2>Uploaded Sermons</h2>
-  <div class="ministry-cards">
-    {% for sermon in sermons %}
-    <div class="card">
-      <h3>{{ sermon.title }}</h3>
-      <audio controls>
-        <source src="{{ url_for('static', filename='sermons/' + sermon.filename) }}" type="audio/mpeg">
+<style>
+  .sermon-item {
+    background: #f7f9fc;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+
+  .sermon-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .sermon-meta {
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  .sermon-audio {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .sermon-download {
+    color: #0095ff;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .sermon-download:hover {
+    text-decoration: underline;
+  }
+</style>
+  <input type="text" id="searchInput" placeholder="Search sermons by title..." class="form-control mb-4">
+<div class="container">
+
+  <h1 style="text-align: center; color: #003366;">Latest Sermons</h1>
+
+
+
+  {% for sermon in sermon_files %}
+    <div class="sermon-item">
+      <div class="sermon-title">🎧 {{ sermon.title }}</div>
+
+      <audio class="sermon-audio" controls>
+        <source src="{{ url_for('static', filename='uploads/' + sermon.filename) }}" type="audio/mpeg">
+        Your browser does not support the audio element.
       </audio>
-      <form action="{{ url_for('delete_sermon', sermon_id=sermon.id) }}" method="POST">
-        <button type="submit" onclick="return confirm('Are you sure you want to delete this sermon?')">Delete</button>
-      </form>
+
+      <div class="sermon-meta">
+        <strong>Uploaded:</strong> {{ sermon.uploaded_at.strftime('%b %d, %Y') }}<br>
+    <form action="{{ url_for('delete_sermon', sermon_id=sermon.id) }}" method="POST">  
+        <button class="btn" type="submit" onclick="return confirm('Are you sure you want to delete this sermon?')">Delete</button>  
+      </form>  
+    
+      </div>
     </div>
-    {% endfor %}
-  </div>
+  {% else %}
+    <p>No sermons uploaded yet.</p>
+  {% endfor %}
+</div>
 </section>
     </main>
   </div>
@@ -47,3 +100,18 @@
 </html>
 
 
+    <main class="main-content">  
+     <section class="manage-sermons">  
+  <h2>Uploaded Sermons</h2>  
+  <div class="ministry-cards">  
+    {% for sermon in sermons %}  
+    <div class="card">  
+      <h3>{{ sermon.title }}</h3>  
+      <audio controls>  
+        <source src="{{ url_for('static', filename='sermons/' + sermon.filename) }}" type="audio/mpeg">  
+      </audio>  
+    </div>  
+    {% endfor %}  
+  </div>  
+</section>                                                                                                                                        </main>  
+  

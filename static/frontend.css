@@ -493,3 +493,83 @@ footer {
   border-left: 4px solid #cc0000;
   padding-left: 1rem;
 }
+
+.search-bar {
+  margin: 20px 0;
+  text-align: center;
+}
+.search-bar input {
+  padding: 10px;
+  width: 80%;
+  max-width: 400px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.sermon-item {
+  margin-bottom: 20px;
+}
+
+.audio-wrapper {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.audio-animation {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 10px;
+  height: 10px;
+  background: #0095ff;
+  border-radius: 50%;
+  animation: none;
+}
+
+.audio-playing .audio-animation {
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.5); opacity: 0.5; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+  .sermon-item {
+    background: #f7f9fc;
+    color: #000;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+
+  .sermon-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .sermon-meta {
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  .sermon-audio {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .sermon-download {
+    color: #0095ff;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .sermon-download:hover {
+    text-decoration: underline;
+  }

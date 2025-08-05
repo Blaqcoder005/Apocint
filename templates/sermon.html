@@ -15,6 +15,7 @@
       <li><a href="/about">About</a></li> 
       <li><a href="/sermond">Sermons</a></li> 
       <li><a href="/event">Events</a></li> 
+      <li><a href="/resources">Books</a></li>
       <li><a href="/contact">Contact</a></li> 
      </ul> 
     </div> 
@@ -22,19 +23,32 @@
   <section class="ministries">
    <div class="container"> 
     <h2>SERMONS</h2> 
-    <div class="ministry-cards"> 
-     <div class="card"> 
-      <h1>Latest Sermons</h1> {% if sermon_files %} 
-      <ul>
-        {% for sermon in sermon_files %} 
-       <li> <a href="{{ url_for('static', filename='sermons/' + sermon) }}" download>{{ sermon }}</a> </li> {% endfor %} 
-      </ul> {% else %} 
-      <p>No sermons uploaded yet.</p> {% endif %} 
-     </div> 
-    </div> 
-   </div>
-  </div>
- </section> <!-- Footer --> 
+    <div class="ministry-cards">
+
+	<div class="search-bar">
+	  <input type="text" id="searchInput" placeholder="Search sermons by title...">
+	</div>
+        <div class="container">
+
+	  {% for sermon in sermon_files %}
+	    <div class="sermon-item">
+	      <div class="sermon-title">🎧 {{ sermon.title }}</div>
+
+	      <audio class="sermon-audio" controls>
+	        <source src="{{ url_for('static', filename='uploads/' + sermon.file_name) }}" type="audio/mpeg">
+	        Your browser does not support the audio element.
+	      </audio>
+
+	      <div class="sermon-meta">
+	        <strong>Uploaded:</strong> {{ sermon.uploaded_at.strftime('%b %d, %Y') }}<br>
+	        <a href="{{ url_for('static', filename='uploads/' + sermon.file_name) }}" class="sermon-download" download>⬇ Download Sermon</a>
+	      </div>
+	    </div>
+	  {% else %}
+	    <p>No sermons uploaded yet.</p>
+	  {% endfor %}
+         </div>
+  </section> <!-- Footer --> 
   <footer>
    <div class="container"> 
     <p>© 2025 Apostolic Chapel International. All rights reserved.</p> 
@@ -73,4 +87,35 @@
     link.addEventListener("click", () => {
       navLinks.classList.remove("show");
     });
-  });</script></body></html>
+  });
+
+
+
+  const searchInput = document.getElementById("searchInput");
+  searchInput.addEventListener("input", function () {
+    const filter = searchInput.value.toLowerCase();
+    const items = document.querySelectorAll("#sermonList .sermon-item");
+
+    items.forEach(item => {
+      const title = item.querySelector(".sermon-title").textContent.toLowerCase();
+      item.style.display = title.includes(filter) ? "" : "none";
+    });
+  });
+
+
+  const audios = document.querySelectorAll(".sermon-audio");
+  audios.forEach(audio => {
+    audio.addEventListener("play", () => {
+      audios.forEach(a => {
+        a.closest(".audio-wrapper").classList.remove("audio-playing");
+      });
+      audio.closest(".audio-wrapper").classList.add("audio-playing");
+    });
+
+    audio.addEventListener("pause", () => {
+      audio.closest(".audio-wrapper").classList.remove("audio-playing");
+    });
+  });
+  </script>
+ </body>
+</html>

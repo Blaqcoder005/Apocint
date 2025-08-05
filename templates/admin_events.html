@@ -17,6 +17,7 @@
           <li><a href="/admin/messages">Messages</a></li>
           <li><a href="/admin/sermons">Manage Sermons</a></li>
           <li><a href="/admin/events">Manage Events</a></li>
+          <li><a href="/admin/resources">Books</a></li>
           <li><a href="/upload">Upload</a></li>
           <li><a href="/logout">Logout</a></li>
         </ul>
@@ -34,7 +35,7 @@
       <p><strong>Date:</strong> {{ event.event_date }}</p>
       <p>{{ event.description }}</p>
       <form action="{{ url_for('delete_event', event_id=event.id) }}" method="POST">
-        <button type="submit" onclick="return confirm('Delete this event?')">Delete</button>
+        <button class="btn" type="submit" onclick="return confirm('Delete this event?')">Delete</button>
       </form>
     </div>
     {% endfor %}

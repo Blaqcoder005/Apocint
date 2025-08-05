@@ -1,0 +1,56 @@
+<html6 lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ACI Admin Messages</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <button class="menu-toggle" id="menuToggle"> <span></span> <span></span> <span></span> </button>
+  <div class="dashboard">
+    <aside class="sidebar">
+      <h2>ACI Dashboard</h2>
+      <nav>
+        <ul>
+          <li><a href="/dashboard">Dashboard</a></li>
+          <li><a href="/admin/messages">Messages</a></li>
+          <li><a href="/admin/sermons">Manage Sermons</a></li>
+          <li><a href="/resources">Books</a></li>
+          <li><a href="/admin/events">Manage Events</a></li>
+          <li><a href="/upload">Upload</a></li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <!-- Main Content -->
+    <main class="main-content">
+	<div class="card">
+	  <h2>Upload Book / PDF</h2>
+	  <form action="/admin/resources" method="POST" enctype="multipart/form-data">
+	    <input type="text" name="title" placeholder="Book Title" required><br><br>
+	    <input type="file" name="pdf_file" accept="application/pdf" required><br><br>
+	    <button type="submit">Upload</button>
+	  </form>
+	</div>
+
+	<hr>
+
+	<h2>Uploaded Books</h2>
+	<ul>
+	  {% for book in books %}
+	  <li>
+	    <strong>{{ book.title }}</strong> -
+	    <a href="{{ url_for('static', filename='resources/' + book.file_name) }}" target="_blank">View PDF</a>
+	    |
+	    <form action="/admin/delete-book/{{ book.id }}" method="POST" style="display:inline;" onsubmit="return confirm('Delete this book?')">
+	      <button class="btn" type="submit">Delete</button>
+	    </form>
+	  </li>
+	  {% else %}
+	  <p>No books uploaded yet.</p>
+	  {% endfor %}
+	</ul>
+   </main>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

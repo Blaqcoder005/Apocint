@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apostolic Chapel International | Habitation of Grace</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='frontend.css') }}">
+  </head>
+ <body> <!-- Navigation -->
+  <header class="navbar">
+    <div class="container">
+     <div class="logo"></div> <button class="menu-toggle" id="menuToggle">☰</button>
+     <ul class="nav-links" id="navLinks">
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/sermon">Sermons</a></li>
+      <li><a href="/event">Events</a></li>
+      <li><a href="/resources">Books</a></li>
+      <li><a href="/contact">Contact</a></li>
+     </ul>
+    </div>
+  </header>
+  <section class="ministries">
+    <div class="container">
+	  <h2> Books </h2>
+	  {% if books %}
+	    <ul>
+	      {% for book in books %}
+	        <li>
+	          <strong>{{ book.title }}</strong> —
+	          <a href="{{ url_for('static', filename='books/' + book.file_name) }}" download>Download</a>
+	        </li>
+	      {% endfor %}
+	    </ul>
+	  {% else %}
+	    <p>No resources uploaded yet.</p>
+	  {% endif %}
+     </div>
+   </section>
+<script>
+    const links = document.querySelectorAll('nav a');
+  const currentPage = window.location.pathname;
+  links.forEach(link => {
+    if (link.getAttribute('href') === currentPage) {
+      link.classList.add('active');
+    }
+  });
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute("href")).scrollIntoView({
+        behavior: "smooth"
+      });
+    });
+  });
+
+  // Navbar toggle and auto-close
+  const menuToggle = document.getElementById("menuToggle");
+  const navLinks = document.getElementById("navLinks");
+
+  menuToggle.addEventListener("click", function () {
+    navLinks.classList.toggle("show");
+  });
+
+  document.querySelectorAll("#navLinks a").forEach(link => {
+    link.addEventListener("click", () => {
+      navLinks.classList.remove("show");
+    });
+  });
+
+</script>
+</body>
+</html>

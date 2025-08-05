@@ -17,6 +17,7 @@
           <li><a href="/admin/messages">Messages</a></li>
           <li><a href="/admin/sermons">Manage Sermons</a></li>
           <li><a href="/admin/events">Manage Events</a></li>
+          <li><a href="/admin/resources">Books</a></li>
           <li><a href="/upload">Upload</a></li>
           <li><a href="/logout">Logout</a></li>
         </ul>
@@ -33,7 +34,7 @@
 	    <p><strong>Message:</strong><br>{{ msg.message }}</p>
 
 	    <form action="{{ url_for('delete_message', message_id=msg.id) }}" method="POST" style="margin-top: 10px;">
-	      <button type="submit" class="delete-btn" onclick="return confirm('Delete this message?')">🗑 Delete</button>
+	      <button class="btn" type="submit" class="delete-btn" onclick="return confirm('Delete this message?')">🗑 Delete</button>
 	    </form>
 	  </div>
 	{% endfor %}

@@ -4,191 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
   <title>Apostolic Chapel International | Habitation of Grace</title> 
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> 
- <style type="text/css" id="dcoder_stylesheet">/* ===== RESET ===== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: "Poppins", sans-serif;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background-color: #fff;
-  overflow-x: hidden;
-}
-
-/* ===== MENU TOGGLE ===== */
-.menu-toggle {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 1001;
-  background: #0095ff;
-  border: none;
-  padding: 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  display: none;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 36px;
-  height: 30px;
-}
-
-.menu-toggle span {
-  display: block;
-  height: 3px;
-  width: 100%;
-  background: white;
-  border-radius: 3px;
-  transition: 0.3s ease;
-}
-
-/* ===== DASHBOARD LAYOUT ===== */
-.dashboard {
-  display: flex;
-}
-
-/* ===== SIDEBAR ===== */
-.sidebar {
-  width: 250px;
-  background-color: #222;
-  color: white;
-  padding: 20px;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  transition: transform 0.3s ease;
-  z-index: 1000;
-}
-
-.sidebar h2 {
-  color: #0095ff;
-  margin-bottom: 20px;
-}
-
-.sidebar nav ul {
-  list-style: none;
-}
-
-.sidebar nav ul li {
-  margin-bottom: 15px;
-}
-
-.sidebar nav ul li a {
-  color: white;
-  text-decoration: none;
-  padding: 10px 12px;
-  display: block;
-  border-radius: 5px;
-  transition: background 0.3s ease;
-}
-
-.sidebar nav ul li a:hover {
-  background-color: #0095ff;
-}
-
-/* ===== MAIN CONTENT ===== */
-.main-content {
-  margin-left: 250px;
-  padding: 40px 20px;
-  flex: 1;
-  transition: margin 0.3s ease;
-}
-
-.upload-sermon {
-  margin-bottom: 2rem;
-}
-
-.upload-sermon h2 {
-  margin-bottom: 1rem;
-}
-
-.upload-sermon input,
-.upload-sermon button {
-  display: block;
-  margin-bottom: 1rem;
-  padding: 10px;
-  width: 100%;
-  max-width: 400px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-. button {
-  background-color: #0095ff;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-.upload-sermon button:hover {
-  background-color: #007acc;
-}
-
-/* ===== EVENT CARDS ===== */
-.ministry-cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.event-upload button {
-  background-color: #0095ff;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-.event-upload input,
-.event-upload button
-.event-upload textarea {
-  display: block;
-  margin-bottom: 20px;
-  padding: 10px;
-  width: 100%;
-  max-width: 400px;
-  border-radius: 5px
-  border: 1px solid #ccc;
-}
-
-.event-upload textarea {
-  height: 150px;
-  resize: vertical;
-}
-
-
-.event-upload button:hover {
-  background-color: #007acc;
-}
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 768px) {
-  .menu-toggle {
-    display: flex;
-  }
-
-  .sidebar {
-    transform: translateX(-100%);
-  }
-
-  .sidebar.open {
-    transform: translateX(0);
-  }
-
-  .main-content {
-    margin-left: 0;
-    padding: 80px 20px 20px;
-  }
-
-  .main-content.expanded {
-    margin-left: 0;
-  }
-}</style></head> 
+ </head> 
  <body> <button class="menu-toggle" id="menuToggle"><span></span> <span></span> <span></span> </button> 
   <div class="dashboard"> 
    <aside class="sidebar"> 
@@ -199,6 +15,7 @@ body {
       <li><a href="/admin/messages">Messages</a></li> 
       <li><a href="/admin/sermons">Manage Sermons</a></li>
       <li><a href="/admin/events">Manage Events</a></li>
+      <li><a href="/admin/resoures">Books</a></li>
       <li><a href="/upload">Upload</a></li> 
       <li><a href="/logout">Logout</a></li> 
      </ul> 
@@ -209,17 +26,24 @@ body {
      <h2>Upload New Sermon</h2> 
      <form action="/upload-sermon" method="POST" enctype="multipart/form-data"> 
       <input type="text" name="title" placeholder="Sermon Title" required> 
-      <input type="file" name="sermon_file" required> <button type="submit">Upload Sermon</button> 
+      <input type="file" name="sermon_file" required> <button class="btn" type="submit">Upload Sermon</button> 
      </form> 
     </section> 
     <section class="upload-event">
   <h2>Upload New Event</h2>
   <form action="/upload-event" method="POST">
     <input type="text" name="title" placeholder="Event Title" required>
-    <input type="date" name="date" required>
+    <input type="date" name="date" placeholder="event date"  required>
     <textarea name="description" placeholder="Event Description" required></textarea>
-    <button type="submit">Upload Event</button>
+    <button class="btn" type="submit">Upload Event</button>
   </form>
+
+  <h2>Upload a Book</h2>
+<form method="POST" enctype="multipart/form-data">
+  <input type="text" name="title" placeholder="Book Title" required><br><br>
+  <input type="file" name="book" accept=".pdf" required><br><br>
+  <button class="btn"type="submit">Upload Book</button>
+</form>
 </section>
    </main> 
   </div> 

@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify, session
 from dotenv import load_dotenv
+from werkzeug.security import check_password_hash
 import os
 from datetime import datetime
 import time
@@ -32,11 +33,8 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
 ALLOWED_EXTENSIONS = {'mp3', 'mp4', 'pdf', 'wav'}
 
-ADMIN_USERNAME = os.getenv("ADMIN_USERNAME")
-ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD")
-
 def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSION
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def get_db_connection():
     return pg8000.connect(
@@ -52,18 +50,16 @@ def get_db_connection():
 def home():
     conn = get_db_connection()
     cursor = conn.cursor()
-
-    # Latest sermon
     cursor.execute("SELECT * FROM sermons ORDER BY id DESC LIMIT 1")
-    sermon_columns = [desc[0] for desc in cursor.description]
     latest_sermon = cursor.fetchone()
-    latest_sermon = dict(zip(sermon_columns, latest_sermon)) if latest_sermon else None
 
-    # Upcoming event
     cursor.execute("SELECT * FROM events ORDER BY event_date ASC LIMIT 1")
-    event_columns = [desc[0] for desc in cursor.description]
     upcoming_event = cursor.fetchone()
-    upcoming_event = dict(zip(event_columns, upcoming_event)) if upcoming_event else None
+
+    if upcoming_event:
+        columns = [desc[0] for desc in cursor.description]
+        upcoming_event = dict(zip(columns, upcoming_event))
+        upcoming_event['event_date'] = upcoming_event['event_date'].strftime('%Y-%m-%dT%H:%M:%S')
 
     cursor.close()
     conn.close()
@@ -103,16 +99,11 @@ def contact():
 def sermons():
     conn = get_db_connection()
     cursor = conn.cursor()
-
-    cursor.execute("SELECT * FROM sermons ORDER BY uploaded_at DESC")
-    columns = [desc[0] for desc in cursor.description]
+    cursor.execute("SELECT title, filename, uploaded_at FROM sermons ORDER BY uploaded_at DESC")
     rows = cursor.fetchall()
-
-    sermons = [dict(zip(columns, row)) for row in rows]
-
+    sermons = [{"title": row[0], "file_name": row[1], "uploaded_at": row[2]} for row in rows]
     cursor.close()
     conn.close()
-
     return render_template('sermon.html', sermon_files=sermons)
 
 @app.route('/event')
@@ -135,30 +126,67 @@ def event():
     conn.close()
     return render_template('events.html', events=events)
 
-
+@app.route('/resources')
+def resources():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM books ORDER BY uploaded_at DESC")
+    columns = [desc[0] for desc in cursor.description]
+    rows = cursor.fetchall()
+    books = [dict(zip(columns, row)) for row in rows]
+    cursor.close()
+    conn.close()
+    return render_template('resources.html', books=books)
 # === Auth Routes ===
+@app.route('/create-admin')
+def create_admin():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    from werkzeug.security import generate_password_hash
+    hash_pw = generate_password_hash("Apocint")
+    cursor.execute("INSERT INTO admins (username, password_hash) VALUES (%s, %s)", ("Apocint", hash_pw))
+    conn.commit()
+    cursor.close()
+    conn.close()
+    return "Admin created!"
+
+@app.route('/update-admin-password')
+def update_admin_password():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    from werkzeug.security import generate_password_hash
+    hash_pw = generate_password_hash("Apocint")  # or any new password you want
+    cursor.execute("UPDATE admins SET password_hash = %s WHERE username = %s", (hash_pw, "Apocint"))
+    conn.commit()
+    cursor.close()
+    conn.close()
+    return "Admin password updated!"
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    ip = request.remote_addr
-    current_time = time.time()
-
     if request.method == "POST":
-        failed_logins.setdefault(ip, [])
-        failed_logins[ip] = [t for t in failed_logins[ip] if current_time - t < BLOCK_DURATION]
-
-        if len(failed_logins[ip]) >= MAX_ATTEMPTS:
-            return "Too many failed attempts. Try again later.", 429
         username = request.form.get('username')
         password = request.form.get('password')
 
-        if username == ADMIN_USERNAME and password == ADMIN_PASSWORD:
-            session['admin_logged_in'] = True
-            return redirect('/dashboard')
-        else:
-            failed_logins[ip].append(current_time)
-            return "Invalid credentials", 401
-        print("USERNAME:", ADMIN_USERNAME)
-        print("PASSWORD:", ADMIN_PASSWORD)
+        print("Username from form:", username)
+        print("Password from form:", password)
+
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT password_hash FROM admins WHERE username = %s", (username,))
+        result = cursor.fetchone()
+
+        print("Query result:", result)
+
+        if result:
+            from werkzeug.security import check_password_hash
+            match = check_password_hash(result[0], password)
+            print("Password match:", match)
+            if match:
+                session['admin_logged_in'] = True
+                return redirect('/dashboard')
+
+        return "Invalid credentials", 401
 
     return render_template("login.html")
 
@@ -199,8 +227,14 @@ def upload_sermon():
 
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
-        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        upload_folder = os.path.join('static', 'uploads')
+        
+        # ✅ Ensure the folder exists
+        os.makedirs(upload_folder, exist_ok=True)
+
+        filepath = os.path.join(upload_folder, filename)
         file.save(filepath)
+
 
         conn = get_db_connection()
         cursor = conn.cursor()
@@ -217,19 +251,50 @@ def upload_sermon():
 
 @app.route('/upload-book', methods=['POST'])
 def upload_book():
-    title = request.form['title']
-    file = request.files['book_file']
-    if file and allowed_file(file.filename, ['pdf']):
-        filename = secure_filename(file.filename)
-        file.save(os.path.join('static/books', filename))
+    if 'admin_logged_in' not in session:
+        return redirect(url_for('login'))
 
-        conn = get_db_connection()
-        cursor = conn.cursor()
-        cursor.execute("INSERT INTO books (title, filename) VALUES (%s, %s)", (title, filename))
+    if request.method == 'POST':
+        title = request.form['title']
+        book_file = request.files['book']
+
+        if book_file and book_file.filename.endswith('.pdf'):
+            filename = secure_filename(book_file.filename)
+            save_path = os.path.join('static/books', filename)
+            book_file.save(save_path)
+
+            conn = get_db_connection()
+            cursor = conn.cursor()
+            cursor.execute("INSERT INTO books (title, file_name) VALUES (%s, %s)", (title, filename))
+            conn.commit()
+            cursor.close()
+            conn.close()
+
+            return "Upload Successful"
+
+    return redirect(url_for("admin_resources"))
+
+@app.route('/admin/delete-book/<int:book_id>', methods=['POST'])
+def delete_book(book_id):
+    if 'admin_logged_in' not in session:
+        return redirect(url_for('login'))
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT file_name FROM books WHERE id = %s", (book_id,))
+    result = cursor.fetchone()
+
+    if result:
+        file_path = os.path.join('static/books', result[0])
+        if os.path.exists(file_path):
+            os.remove(file_path)
+
+        cursor.execute("DELETE FROM books WHERE id = %s", (book_id,))
         conn.commit()
-        conn.close()
-        flash("Book uploaded!")
-    return redirect(url_for('admin_upload'))
+
+    cursor.close()
+    conn.close()
+    return redirect(url_for("admin_resources"))
 
 @app.route('/upload-event', methods=['POST'])
 def upload_event():
@@ -349,6 +414,23 @@ def admin_upload():
     if 'admin_logged_in' not in session:
         return redirect(url_for('login'))
     return render_template('admin_uploads.html')
+
+@app.route('/admin/resources')
+def admin_resources():
+    if 'admin_logged_in' not in session:
+        return redirect(url_for('login'))
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM books ORDER BY uploaded_at DESC")
+    columns = [desc[0] for desc in cursor.description]
+    rows = cursor.fetchall()
+    books = [dict(zip(columns, row)) for row in rows]
+
+    cursor.close()
+    conn.close()
+
+    return render_template('admin_resources.html', books=books)
 
 # === Database Test ===
 @app.route('/test-db')

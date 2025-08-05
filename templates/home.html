@@ -16,6 +16,7 @@
      <li><a href="/about">About</a></li>
      <li><a href="/sermons">Sermons</a></li>
      <li><a href="/event">Events</a></li>
+     <li><a href="/resources">Books</a></li>
      <li><a href="/contact">Contact</a></li>
     </ul> 
    </div> 
@@ -35,21 +36,12 @@
   </div>
  </section> <!-- Ministries Section with Parallax --> 
  <section class="parallax-section">
-   <div class="container"> 
-    <h2>Upcoming Events</h2>
-	    {% if events %}
-	      <div class="card">
-	        <h3>{{ events[0].title }}</h3>
-	        <p><strong>Date:</strong> {{ events[0].event_date }}</p>
-	        <p>{{ events[0].description }}</p>
-	        <a href="/events" class="btn">View All Events</a>
-	      </div>
-	    {% else %}
-	      <p>No upcoming events yet.</p>
-	    {% endif %}
-	  </div>
-
-   </div> 
+	<div class="container">
+	  <h2>Next Event: {{ upcoming_event.title }}</h2>
+	  <p><strong>Date:</strong> {{ upcoming_event.event_date[:10] }}</p>
+	  <p>{{ upcoming_event.description }}</p>
+	  <p id="countdown">Loading countdown...</p>
+	</div>
  </section> <!-- Sermon Teaser --> 
  <section class="sermon">  
     <h2>Latest Sermon</h2> 
@@ -107,6 +99,34 @@
     link.addEventListener("click", () => {
       navLinks.classList.remove("show");
     });
-  });</script>
+  });
+
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const countdownEl = document.getElementById("countdown");
+    const eventDate = new Date("{{ upcoming_event.event_date }}");
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = eventDate - now;
+
+      if (diff <= 0) {
+        countdownEl.textContent = "Event has started!";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      countdownEl.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s left`;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  });
+</script>
+
 </body>
 </html>
