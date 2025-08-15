@@ -35,14 +35,19 @@
    </div> 
   </div>
  </section> <!-- Ministries Section with Parallax --> 
- <section class="parallax-section">
-	<div class="container">
-	  <h2>Next Event: {{ upcoming_event.title }}</h2>
-	  <p><strong>Date:</strong> {{ upcoming_event.event_date[:10] }}</p>
-	  <p>{{ upcoming_event.description }}</p>
-	  <p id="countdown">Loading countdown...</p>
-	</div>
- </section> <!-- Sermon Teaser --> 
+{% if upcoming_event %}
+<section class="parallax-section">
+    <div class="container">
+        <h2>Next Event: {{ upcoming_event.title }}</h2>
+        <p><strong>Date:</strong> {{ upcoming_event.event_date.strftime('%b %d, %Y') }}</p>
+        <p>{{ upcoming_event.description }}</p>
+        <p id="countdown">Loading countdown...</p>
+    </div>
+</section>
+{% else %}
+<p>No upcoming events at the moment.</p>
+{% endif %}
+
  <section class="sermon">  
     <h2>Latest Sermon</h2> 
     <p><em>“Grace for the Journey”</em> by Apostle Joshua Oluseye</p> <a href="/sermons" class="btn">Watch Sermons</a> 

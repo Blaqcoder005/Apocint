@@ -67,21 +67,33 @@ def get_db_connection():
 def home():
     conn = get_db_connection()
     cursor = conn.cursor()
+
+    # Get the latest sermon
     cursor.execute("SELECT * FROM sermons ORDER BY id DESC LIMIT 1")
-    latest_sermon = cursor.fetchone()
-
-    cursor.execute("SELECT * FROM events ORDER BY event_date ASC LIMIT 1")
-    upcoming_event = cursor.fetchone()
-
-    if upcoming_event:
+    latest_sermon_row = cursor.fetchone()
+    latest_sermon = None
+    if latest_sermon_row:
         columns = [desc[0] for desc in cursor.description]
-        upcoming_event = dict(zip(columns, upcoming_event))
-        upcoming_event['event_date'] = upcoming_event['event_date'].strftime('%Y-%m-%dT%H:%M:%S')
+        latest_sermon = dict(zip(columns, latest_sermon_row))
+
+    # Get the upcoming event
+    cursor.execute("SELECT * FROM events ORDER BY event_date ASC LIMIT 1")
+    upcoming_event_row = cursor.fetchone()
+    upcoming_event = None
+    if upcoming_event_row:
+        columns = [desc[0] for desc in cursor.description]
+        upcoming_event = dict(zip(columns, upcoming_event_row))
+        # Keep event_date as datetime for template formatting
+        # No conversion to string here
 
     cursor.close()
     conn.close()
 
-    return render_template('home.html', latest_sermon=latest_sermon, upcoming_event=upcoming_event)
+    return render_template(
+        'home.html',
+        latest_sermon=latest_sermon,
+        upcoming_event=upcoming_event
+    )
 
 @app.route('/about')
 def about():
