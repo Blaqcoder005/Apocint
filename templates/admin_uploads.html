@@ -15,7 +15,7 @@
       <li><a href="/admin/messages">Messages</a></li> 
       <li><a href="/admin/sermons">Manage Sermons</a></li>
       <li><a href="/admin/events">Manage Events</a></li>
-      <li><a href="/admin/resoures">Books</a></li>
+      <li><a href="/admin/resources">Books</a></li>
       <li><a href="/upload">Upload</a></li> 
       <li><a href="/logout">Logout</a></li> 
      </ul> 
@@ -31,15 +31,15 @@
     </section> 
     <section class="upload-event">
   <h2>Upload New Event</h2>
-  <form action="/upload-event" method="POST">
+  <form action="/upload-event" method="POST" enctype="multipart/form-data">
+    <input type="file" name="event_image" accept="image/*" required>
     <input type="text" name="title" placeholder="Event Title" required>
     <input type="date" name="date" placeholder="event date"  required>
     <textarea name="description" placeholder="Event Description" required></textarea>
     <button class="btn" type="submit">Upload Event</button>
   </form>
-
   <h2>Upload a Book</h2>
-<form method="POST" enctype="multipart/form-data">
+<form action="upload-book"  method="POST" enctype="multipart/form-data">
   <input type="text" name="title" placeholder="Book Title" required><br><br>
   <input type="file" name="book" accept=".pdf" required><br><br>
   <button class="btn"type="submit">Upload Book</button>

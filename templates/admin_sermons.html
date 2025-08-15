@@ -27,56 +27,16 @@
     <main class="main-content">
      <section class="manage-sermons">
   <h2>Uploaded Sermons</h2>
-<style>
-  .sermon-item {
-    background: #f7f9fc;
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  }
 
-  .sermon-title {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 10px;
-  }
-
-  .sermon-meta {
-    font-size: 0.9rem;
-    color: #666;
-  }
-
-  .sermon-audio {
-    width: 100%;
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
-
-  .sermon-download {
-    color: #0095ff;
-    font-weight: 500;
-    text-decoration: none;
-  }
-
-  .sermon-download:hover {
-    text-decoration: underline;
-  }
-</style>
   <input type="text" id="searchInput" placeholder="Search sermons by title..." class="form-control mb-4">
 <div class="container">
-
-  <h1 style="text-align: center; color: #003366;">Latest Sermons</h1>
-
-
 
   {% for sermon in sermon_files %}
     <div class="sermon-item">
       <div class="sermon-title">🎧 {{ sermon.title }}</div>
 
       <audio class="sermon-audio" controls>
-        <source src="{{ url_for('static', filename='uploads/' + sermon.filename) }}" type="audio/mpeg">
+        <source src="{{ url_for('static', filename='uploads/' + sermon.file_name) }}" type="audio/mpeg">
         Your browser does not support the audio element.
       </audio>
 
@@ -100,18 +60,3 @@
 </html>
 
 
-    <main class="main-content">  
-     <section class="manage-sermons">  
-  <h2>Uploaded Sermons</h2>  
-  <div class="ministry-cards">  
-    {% for sermon in sermons %}  
-    <div class="card">  
-      <h3>{{ sermon.title }}</h3>  
-      <audio controls>  
-        <source src="{{ url_for('static', filename='sermons/' + sermon.filename) }}" type="audio/mpeg">  
-      </audio>  
-    </div>  
-    {% endfor %}  
-  </div>  
-</section>                                                                                                                                        </main>  
-  

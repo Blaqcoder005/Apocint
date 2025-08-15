@@ -128,16 +128,13 @@ def event():
    
     conn = get_db_connection()
     cursor = conn.cursor()
-
     cursor.execute("SELECT * FROM events ORDER BY event_date DESC")
     rows = cursor.fetchall()
     columns = [desc[0] for desc in cursor.description]
     events = [dict(zip(columns, row)) for row in rows]
-
-    cursor.close()
     conn.close()
-
     return render_template('events.html', events=events)
+
 
 @app.route('/resources')
 def resources():

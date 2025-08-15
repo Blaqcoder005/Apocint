@@ -25,20 +25,20 @@
    <section class="ministries">
     <div class="container">
         <h1>Upcoming Events</h1>
+	{% for event in events %}
+	  <div class="ministry-card">
 
-        {% if events %}
-        <div class="ministry-cards">
-            {% for event in events %}
-            <div class="card">
-                <h3>{{ event.title }}</h3>
-                <p><strong>Date:</strong> {{ event.event_date }}</p>
-                <p>{{ event.description }}</p>
-            </div>
-            {% endfor %}
-        </div>
-        {% else %}
-        <p class="no-events">No events uploaded yet.</p>
-        {% endif %}
+	    {% if event.image_filename %}
+	      <img src="{{ url_for('static', filename='uploads/event_images/' + event.image_filename) }}"
+	           alt="Event Image"
+	           style="max-width:100%; height:auto;">
+	    {% endif %}
+
+	    <h3>{{ event.title }}</h3>
+	    <p><strong>Date:</strong> {{ event.event_date.strftime('%b %d, %Y') }}</p>
+	    <p>{{ event.description }}</p>
+	  </div>
+	{% endfor %}
     </div>
   </section>
 <script type="text/javascript" id="dcoder_script">

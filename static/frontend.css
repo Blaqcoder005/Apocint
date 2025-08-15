@@ -392,19 +392,19 @@ footer {
   margin-bottom: 0.5rem;
 }
 
-.event-meta {
+event-meta {
   margin-top: 1rem;
   font-size: 0.9rem;
   color: #555;
 }
 
-.event-date {
+event-date {
   display: block;
   font-weight: bold;
   color: #0095ff;
 }
 
-.event-location {
+event-location {
   display: block;
   margin-top: 0.3rem;
 }

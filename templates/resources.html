@@ -28,7 +28,7 @@
 	      {% for book in books %}
 	        <li>
 	          <strong>{{ book.title }}</strong> —
-	          <a href="{{ url_for('static', filename='books/' + book.file_name) }}" download>Download</a>
+	          <a href="{{ url_for('static', filename='books/' + book.filename) }}" download>Download</a>
 	        </li>
 	      {% endfor %}
 	    </ul>

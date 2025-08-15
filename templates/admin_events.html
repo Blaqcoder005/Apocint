@@ -1,4 +1,3 @@
-
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -26,21 +25,30 @@
 
     <!-- Main content on the right -->
     <main class="main-content">
-      <section class="manage-events">
-  <h2>Uploaded Events</h2>
-  <div class="ministry-cards">
-    {% for event in events %}
-    <div class="card">
-      <h3>{{ event.title }}</h3>
-      <p><strong>Date:</strong> {{ event.event_date }}</p>
-      <p>{{ event.description }}</p>
-      <form action="{{ url_for('delete_event', event_id=event.id) }}" method="POST">
-        <button class="btn" type="submit" onclick="return confirm('Delete this event?')">Delete</button>
-      </form>
-    </div>
-    {% endfor %}
-  </div>
-</section>
+	<section class="manage-events">
+	  <h2>Uploaded Events</h2>
+
+	  <div class="container">
+		{% for event in events %}
+		  <div class="event-item">
+		    <h3>{{ event.title }}</h3>
+		    <p><strong>Date:</strong> {{ event.event_date.strftime('%b %d, %Y') }}</p>
+		    <p>{{ event.description }}</p>
+
+			{% if event.image_filename %}
+			  <img src="{{ url_for('static', filename='uploads/event_images/' + event.image_filename) }}"
+			       alt="Event Image"
+			       style="max-width:100%; height:auto;">
+			{% endif %}
+
+		    <form action="{{ url_for('delete_event', event_id=event.id) }}" method="POST">
+		        <button class="btn" type="submit" onclick="return confirm('Are you sure you want to delete this sermon?')">Delete</button>
+                    </form>
+		  </div>
+		{% endfor %}
+
+	  </div>
+	</section>
     </main>
   </div>
   <script src="{{ url_for('static', filename='script.js') }}"></script>
